@@ -1,9 +1,26 @@
 import React, { useState } from "react";
+import axios from "axios";
+
+import { Button } from "react-bootstrap";
+
 import './Search.css';
+
+const BOOKS_API_KEY = "AIzaSyDgbqlUYLmDvVnYmHtRSzgekkuxwSGSDpo";
+const BOOKS_API = 'https://www.googleapis.com/books/v1/volumes';
 
 export default function Search() {
     const [search, setSearch] = useState("");
     const [booksList, setList] = useState([]);
+
+    function searchBook() {
+        console.log("Clicked")
+        axios.get(BOOKS_API, {params: {
+            q: search,
+            key: BOOKS_API_KEY
+        }})
+        .then(res => setList(res.data.items))
+        .catch(e => console.log(e));
+    }
 
     return <div className="main-wrapper">
         <h3> Enter book to search for</h3>
@@ -13,10 +30,10 @@ export default function Search() {
         /> 
         <br/>
         <br/>
-        <button onClick={(e) => {}}> Submit </button>
+        <Button onClick={searchBook}> Submit </Button>
 
         <div className="list">
-            {booksList.map((item,ind) => <div key={ind} className="item"> list item </div>)}
+            {booksList.map((item,ind) => <div key={ind} className="item"> {item.volumeInfo.title} : {item.volumeInfo.authors} </div>)}
         </div>
     </div>
 }
