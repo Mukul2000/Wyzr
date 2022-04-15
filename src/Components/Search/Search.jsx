@@ -15,7 +15,6 @@ export default function Search() {
     const navigate = useNavigate();
 
     function searchBook() {
-        console.log("Clicked")
         axios.get(BOOKS_API, {
             params: {
                 q: search,

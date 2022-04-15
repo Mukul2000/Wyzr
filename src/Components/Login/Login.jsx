@@ -15,13 +15,21 @@ export default function Login() {
         }
     }, []);
 
-    function googleSuccess(res) {
-        const user = {
+    async function googleSuccess(res) {
+        const GoogleUser = {
             profile: res.profileObj,
             token: res.tokenId
         };
-        localStorage.setItem('user', JSON.stringify(user));
-        navigate('/search')
+        try {
+            const user = await axios.post('http://localhost:8000/api/login', {"token":GoogleUser.token});
+            localStorage.setItem('user', JSON.stringify(user.data.user));
+            navigate('/search')
+        }
+        catch(e) {
+            console.log(e);
+            alert("Something went wrong!");
+        }
+
     }
 
     function googleFailure(err) {
