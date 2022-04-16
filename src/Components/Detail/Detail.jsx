@@ -15,7 +15,6 @@ export default function Detail(props) {
         })
         .then(res => {
             setBook(res.data);
-            console.log(res.data)
         })
         .catch(e => console.log(e));
     }, []);
