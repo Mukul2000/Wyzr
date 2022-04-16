@@ -4,10 +4,10 @@ import axios from "axios";
 import { Button } from "react-bootstrap";
 
 import './Search.css';
+import { getAuthHeader } from "../../utils/utils";
 import { useNavigate } from "react-router-dom";
 
-const BOOKS_API_KEY = "AIzaSyDgbqlUYLmDvVnYmHtRSzgekkuxwSGSDpo";
-const BOOKS_API = 'https://www.googleapis.com/books/v1/volumes';
+const BOOKS_API = 'http://localhost:8000/api/search';
 
 export default function Search() {
     const [search, setSearch] = useState("");
@@ -17,12 +17,12 @@ export default function Search() {
     function searchBook() {
         axios.get(BOOKS_API, {
             params: {
-                q: search,
-                key: BOOKS_API_KEY
-            }
+                search: search,
+            },
+            headers: getAuthHeader() 
         })
             .then(res => {
-                setList(res.data.items);
+                setList(res.data);
             })
             .catch(e => console.log(e));
     }
