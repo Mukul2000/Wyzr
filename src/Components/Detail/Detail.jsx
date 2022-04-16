@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getAuthHeader } from "../../utils/utils";
 
-const VOLUME_API = "http://localhost:8000/api/book/"
+const VOLUME_API = "https://main.dbw4tddy1dxn9.amplifyapp.com/api/book/"
 
 export default function Detail(props) {
     const [book, setBook] = useState(null);

@@ -7,7 +7,7 @@ import './Search.css';
 import { getAuthHeader } from "../../utils/utils";
 import { useNavigate } from "react-router-dom";
 
-const BOOKS_API = 'http://localhost:8000/api/search';
+const BOOKS_API = 'https://main.dbw4tddy1dxn9.amplifyapp.com/api/search';
 
 export default function Search() {
     const [search, setSearch] = useState("");
